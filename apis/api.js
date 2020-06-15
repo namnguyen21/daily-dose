@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const mongojs = require("mongojs");
+require('dotenv').config()
 
-const db = mongojs("dailydose");
+const db = mongojs(process.env.MONGODB_URI);
 
 const news = db.collection("news");
 const sports = db.collection("sports");
@@ -22,7 +23,6 @@ router.get("/sports", (req, res) => {
   sports.find((err, response) => {
     if (err) throw err;
     else {
-      console.log(response)
       res.json(response);
     }
   });

@@ -1,4 +1,7 @@
 from pymongo import MongoClient
+import os
+from pathlib import Path
+from dotenv import load_dotenv
 from Fox_Scraper import Fox_Scraper
 from Reddit_Scraper import Reddit_Scraper
 from Cnn_Scraper import Cnn_Scraper
@@ -20,9 +23,14 @@ from Time_Scraper import Time_Scraper
 from Reuters_Scraper import Reuters_Scraper
 from Cbs_Scraper import Cbs_Scraper
 
-client = MongoClient('localhost', 27017)
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
 
-db = client.dailydose
+MONGODB_URI = os.getenv('MONGODB_URI')
+
+client = MongoClient(MONGODB_URI)
+
+db = client.get_database('dailydose')
 
 # collections
 news = db.news
@@ -52,7 +60,6 @@ def store_news():
     news.update_one({'name': 'cnn'}, {'$set': {'data': cnn}}, True)
     news.update_one({'name': 'new york times'}, {'$set': {'data': nyt}}, True)
     news.update_one({'name': 'usa today'}, {'$set': {'data': usa}}, True)
-    news.update_one({'name': 'fox'}, {'$set': {'data': fox}}, True)
     news.update_one({'name': 'npr'}, {'$set': {'data': npr}}, True)
     news.update_one({'name': 'associated press'}, {'$set': {'data': ap}}, True)
     news.update_one({'name': 'buzzfeed'}, {'$set': {'data': buzz}}, True)
@@ -60,7 +67,7 @@ def store_news():
     news.update_one({'name': 'nbc'}, {'$set': {'data': nbc}}, True)
     news.update_one({'name': 'wall street journal'},
                     {'$set': {'data': wsj}}, True)
-    news.update_one({'name': 'time'}, {'$set': {'data': time}})
+    news.update_one({'name': 'time'}, {'$set': {'data': time}}, True)
     news.update_one({'name': 'reuters'}, {'$set': {'data': reuters}}, True)
     news.update_one({'name': 'cbs'}, {'$set': {'data': cbs}}, True)
 
@@ -86,8 +93,8 @@ def store_media():
     youtube = Youtube().get_videos()
     giphy = Giphy().get_gifs()
     # clear existing results
-    media.update_one({'name': 'youtube'}, {'$set': {'data': youtube}})
-    media.update_one({'name': 'giphy'}, {'$set': {'data': giphy}})
+    media.update_one({'name': 'youtube'}, {'$set': {'data': youtube}}, True)
+    media.update_one({'name': 'giphy'}, {'$set': {'data': giphy}}, True)
 
 
 def main():

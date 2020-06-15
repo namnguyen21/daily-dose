@@ -15,4 +15,5 @@ class Time_Scraper(Scraper):
             href = a['href']
             link = f'https://time.com{href}'
             self.result.append({'title': title, 'url': link})
+            print(title, link)
         return self.result
