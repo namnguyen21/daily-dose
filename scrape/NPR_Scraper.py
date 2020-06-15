@@ -1,15 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+from Scraper import Scraper
 
 
-class NPR_Scraper():
-    def __init__(self):
-        self.url = 'https://npr.org'
-        self.response = requests.get(self.url)
-        self.soup = BeautifulSoup(self.response.text, 'html.parser')
-        self.result = []  # end product will be list of dicts
-
+class NPR_Scraper(Scraper):
     def get_articles(self):
         articles = self.soup.find_all('div', {'class': 'story-wrap'})
         for article in articles:
@@ -23,4 +18,3 @@ class NPR_Scraper():
             else:
                 continue
         return self.result
-

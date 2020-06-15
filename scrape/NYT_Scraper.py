@@ -1,15 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+from Scraper import Scraper
 
 
-class NYT_Scraper():
-    def __init__(self):
-        self.url = 'https://www.nytimes.com/'
-        self.response = requests.get(self.url)
-        self.soup = BeautifulSoup(self.response.text, 'html.parser')
-        self.result = []  # end product will be list of dicts
-
+class NYT_Scraper(Scraper):
     def get_articles(self):
         # this will provide hundreds of articles
         self.articles = self.soup.find_all('article')
@@ -24,5 +19,4 @@ class NYT_Scraper():
                 self.result.append({'title': title, 'url': url})
         return self.result
 
-NYT_Scraper().get_articles()
 

@@ -22,6 +22,7 @@ router.get("/sports", (req, res) => {
   sports.find((err, response) => {
     if (err) throw err;
     else {
+      console.log(response)
       res.json(response);
     }
   });

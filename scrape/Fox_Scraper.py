@@ -1,15 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from pprint import pprint
+from Scraper import Scraper
 
 
-class Fox_Scraper():
-    def __init__(self):
-        self.url = 'https://foxnews.com'
-        self.response = requests.get(self.url)
-        self.soup = BeautifulSoup(self.response.text, 'html.parser')
-        self.result = []  # end product will be list of dicts
-
+class Fox_Scraper(Scraper):
     def get_articles(self):
         # this will provide hundreds of articles
         self.articles = self.soup.find_all('article')

@@ -1,15 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+from Scraper import Scraper
 
 
-class ESPN_Scraper():
-    def __init__(self):
-        self.url = 'https://www.espn.com/'
-        self.response = requests.get(self.url)
-        self.soup = BeautifulSoup(self.response.text, 'html.parser')
-        self.result = []  # end product will be list of dicts
-
+class ESPN_Scraper(Scraper):
     def get_articles(self):
         # this will provide hundreds of articles
         self.articles = self.soup.find_all(
@@ -26,14 +21,13 @@ class ESPN_Scraper():
             except KeyError as err: 
                 print(err)
             headline = article.find('h1', {'class': 'contentItem__title'})
-            title = headline.getText()
-            link = article.find('a')
-            if link is not None: # certain articles wont have linkes
-                href = link['href']
-                url = f'https://espn.com{href}'
-            else : 
-                url = 'https://espn.com' # use base espn url in case no link
-            self.result.append({'title': title, 'url': url, 'image': src})
+            if headline is not None: 
+                title = headline.getText()
+                link = article.find('a')
+                if link is not None: # certain articles wont have linkes
+                    href = link['href']
+                    url = f'https://espn.com{href}'
+                else : 
+                    url = 'https://espn.com' # use base espn url in case no link
+                self.result.append({'title': title, 'url': url, 'image': src})
         return self.result
-
-ESPN_Scraper().get_articles()

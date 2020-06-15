@@ -1,15 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
 from pprint import pprint
+from Scraper import Scraper
 
 
-class Bleacher_Scraper():
-    def __init__(self):
-        self.url = 'https://bleacherreport.com/featured'
-        self.response = requests.get(self.url)
-        self.soup = BeautifulSoup(self.response.text, 'html.parser')
-        self.result = []  # end product will be list of dicts
-
+class Bleacher_Scraper(Scraper):
     def get_articles(self):
         self.articles = self.soup.find_all(
             'li', {'class': 'cell'})

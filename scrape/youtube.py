@@ -15,8 +15,6 @@ DEVELOPER_KEY = os.getenv('GOOGLE_API')
 
 scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
 
-
-
 class Youtube():
     def __init__(self):
         # Disable OAuthlib's HTTPS verification when running locally.
