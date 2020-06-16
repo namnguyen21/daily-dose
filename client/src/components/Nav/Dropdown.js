@@ -8,7 +8,7 @@ const Hover = styled.div`
   right: 2rem;
   cursor: pointer;
   z-index: 99999999;
-  @media(min-width: 800px) {
+  @media (min-width: 800px) {
     display: none;
   }
 `;
@@ -33,7 +33,8 @@ const Menu = styled.ul`
   position: absolute;
   top: 2rem;
   right: 0;
-  background: ${props => props.theme.palette.white};
+  background: ${(props) =>
+    props.dark ? "#1f1f1f" : props.theme.palette.white};
   list-style: none;
   display: ${(props) => (props.open ? null : "none")};
   -webkit-box-shadow: -4px 4px 12px -9px rgba(0, 0, 0, 0.75);
@@ -46,6 +47,8 @@ const MenuItem = styled.li`
   text-align: center;
   text-transform: uppercase;
   font-size: 1.8rem;
+  background: ${(props) =>
+    props.dark ? "#1f1f1f" : props.theme.palette.white};
   color: ${(props) =>
     props.dark ? props.theme.palette.white : props.theme.palette.grey};
   &:hover {
@@ -91,7 +94,7 @@ export default function Dropdown({ dark }) {
         <Burger />
         <Burger />
       </Hamburger>
-      <Menu open={open}>
+      <Menu dark={dark} open={open}>
         <StyledLink to="/">
           <MenuItem dark={dark}>News</MenuItem>
         </StyledLink>

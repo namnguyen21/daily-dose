@@ -12,7 +12,7 @@ export default function MediaContainer({dark}) {
   const [api, setApi] = useState([]);
 
   useEffect(() => {
-    axios.get("/media").then(({ data }) => {
+    axios.get("/api/media").then(({ data }) => {
       setApi(data);
       console.log(data)
     });

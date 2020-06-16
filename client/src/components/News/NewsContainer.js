@@ -22,7 +22,7 @@ export default function NewsContainer({ dark }) {
 
   useEffect(() => {
     console.log("getting information");
-    axios.get("/news").then((response) => {
+    axios.get("/api/news").then((response) => {
       setApiResult(response.data);
     });
   }, [dark]);

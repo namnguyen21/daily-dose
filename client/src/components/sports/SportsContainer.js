@@ -12,7 +12,7 @@ const Container = styled.div`
 export default function SportsContainer({ dark }) {
   const [apiResult, setApiResult] = useState([]);
   useEffect(() => {
-    axios.get("/sports").then((response) => {
+    axios.get("/api/sports").then((response) => {
       setApiResult(response.data);
     });
   });

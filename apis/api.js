@@ -10,7 +10,7 @@ const sports = db.collection("sports");
 const media = db.collection("media");
 
 //route for home page news feed
-router.get("/news", (req, res) => {
+router.get("/api/news", (req, res) => {
   news.find((err, response) => {
     if (err) throw err;
     else {
@@ -19,7 +19,7 @@ router.get("/news", (req, res) => {
   });
 });
 
-router.get("/sports", (req, res) => {
+router.get("/api/sports", (req, res) => {
   sports.find((err, response) => {
     if (err) throw err;
     else {
@@ -28,7 +28,7 @@ router.get("/sports", (req, res) => {
   });
 });
 
-router.get("/media", (req, res) => {
+router.get("/api/media", (req, res) => {
   media.find((err, response) => {
     if (err) throw err;
     else {
