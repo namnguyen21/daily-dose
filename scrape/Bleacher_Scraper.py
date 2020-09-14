@@ -9,7 +9,7 @@ class Bleacher_Scraper(Scraper):
         self.articles = self.soup.find_all(
             'li', {'class': 'cell'})
         pprint(len(self.articles))
-        for i in range(15): # get first 15
+        for i in range(10): # get first 15
             title = self.articles[i].find('h3').getText()
             url = self.articles[i].find('a')['href']
             img = self.articles[i].find('img')['src']

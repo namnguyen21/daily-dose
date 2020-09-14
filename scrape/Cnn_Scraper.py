@@ -25,10 +25,13 @@ class Cnn_Scraper():
         articles = section[1].find_all('article')  # list of all article tags
         for i in range(15):  # get top 15 articles
             headline = articles[i].find('span', {'class': 'cd__headline-text'})
-            title = headline.getText()
-            # this will provide url parameters - we need to prepend cnn.com to front
-            href = articles[i].find('a')['href']
-            url = f'https://cnn.com{href}'
-            self.result.append({'title': title, 'url': url})
+            if headline is not None:
+                title = headline.getText()
+                # this will provide url parameters - we need to prepend cnn.com to front
+                href = articles[i].find('a')['href']
+                url = f'https://cnn.com{href}'
+                self.result.append({'title': title, 'url': url})
         return self.result
+
+Cnn_Scraper().get_articles()
 
